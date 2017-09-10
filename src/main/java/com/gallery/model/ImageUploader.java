@@ -1,12 +1,15 @@
 package com.gallery.model;
 
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.Region;
 import com.gallery.domain.Admin;
 
 import static com.gallery.utils.StringUtils.randomString;
@@ -27,12 +30,14 @@ public class ImageUploader {
 	private String contentType;
 	private Admin admin;
 	private ObjectMetadata meta;
-	
+
+	private String uploadedFileName;
+
 	@Deprecated
 	public ImageUploader() {
-		
+
 	}
-	
+
 	private ImageUploader(Admin admin, String extension, String contentType) {
 		this.admin = admin;
 		this.extension = extension;
@@ -57,36 +62,48 @@ public class ImageUploader {
 		sb.append(this.extension);
 		return sb.toString();
 	}
-	
+
 	private void generateMetadata(int length) {
 		this.meta = new ObjectMetadata();
 		meta.setContentLength(length);
 		meta.setContentType(contentType);
 	}
-	
-	private boolean isExistingBucket() {
-		List <Bucket> bucketlist = s3client.listBuckets();
+
+	private boolean isNonExistingBucket() {
+		List<Bucket> bucketlist = s3client.listBuckets();
 		for (Bucket b : bucketlist) {
 			if (b.getName().equals(this.admin.getName())) {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
-	private PutObjectRequest generatePutRequest() {
-		
+	private CreateBucketRequest generateBucketCreateRequest(String bucketname) {
+		return new CreateBucketRequest(bucketname, Region.AP_Seoul);
 	}
 
-	public String sendImageToS3(byte[] imgbytes) {
+	private PutObjectRequest generatePutRequest(InputStream fileInputStream) {
+
+		String bucketname = BUCKET_PREFIX + DASH + this.admin.getName();
+		this.uploadedFileName = generateFileName();
+
+		if (isNonExistingBucket()) {
+			s3client.createBucket(generateBucketCreateRequest(bucketname));
+		}
+		return new PutObjectRequest(bucketname, uploadedFileName, fileInputStream, meta);
+	}
+
+	public boolean sendImageToS3(byte[] imgbytes) {
 
 		try {
 			InputStream stream = new ByteArrayInputStream(imgbytes);
-			meta.setContentLength(imgbytes.length);
-			meta.setContentType(contentType);
-
+			generateMetadata(imgbytes.length);
+			s3client.putObject(generatePutRequest(stream));
+			return true;
 		} catch (Exception e) {
-
+			System.err.println(e.getMessage());
+			return false;
 		}
 	}
 
