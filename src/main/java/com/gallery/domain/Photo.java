@@ -14,14 +14,12 @@ public class Photo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	
-	
+
 	private String title;
 	private String description;
 	private String path;
 	private String date;
-	
+
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_to_category"))
 	private Category category;
@@ -56,6 +54,22 @@ public class Photo {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
