@@ -28,10 +28,11 @@ public class CategoriesController {
 		if (selectedCategory != null && sessionedInvitation != null) {
 			mav = new ModelAndView("gallery/main");
 			mav.addObject("category", selectedCategory);
+			mav.addObject("list", sessionedInvitation.getAdmin().getCategories());
 		}
 		
 		
-		return null;
+		return new ModelAndView("gallery/fail");
 	}
 
 }

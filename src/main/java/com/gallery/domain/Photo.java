@@ -33,6 +33,10 @@ public class Photo {
 	}
 
 	public String getTitle() {
+		if (this.title == null) {
+			return "";
+		}
+
 		return title;
 	}
 
@@ -41,6 +45,10 @@ public class Photo {
 	}
 
 	public String getDescription() {
+		if (this.description == null) {
+			return "";
+		}
+
 		return description;
 	}
 

@@ -23,6 +23,7 @@ public class ImageUploader {
 	private final int FILEPATH_LENGTH = 20;
 	private final String BUCKET_PREFIX = "mygram-files";
 	private final String DASH = "-";
+	private final String PERIOD = ".";
 
 	AmazonS3 s3client = AmazonS3ClientBuilder.defaultClient();
 
@@ -59,6 +60,7 @@ public class ImageUploader {
 	private String generateFileName() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(randomString(FILEPATH_LENGTH));
+		sb.append(PERIOD);
 		sb.append(this.extension);
 		return sb.toString();
 	}

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gallery.domain.Admin;
 import com.gallery.domain.Category;
 import com.gallery.domain.Invitation;
+import com.gallery.model.InvitationGenerator;
 import com.gallery.repositories.InvitationRepository;
 import com.gallery.utils.SessionInfoUtils;
 
@@ -26,6 +28,13 @@ public class LandingPageController {
 	@GetMapping("/invitation/{permalink}")
 	public String getLandingPage(@PathVariable String permalink, HttpSession session) {
 		
+		if (permalink.equals("preview") && session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD) != null) {
+			Admin admin = (Admin)session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
+			Invitation temporaryInvitation = new Invitation();
+			temporaryInvitation.setAdmin(admin);
+			session.setAttribute(SESSIONED_INVITATION_KEYWORD,  temporaryInvitation);
+			
+		}
 		
 		Invitation invitation = inviteRepo.findByPath(permalink);
 		
@@ -38,6 +47,17 @@ public class LandingPageController {
 		
 		return ("user/linkfail");
 		
+	}
+	
+	@GetMapping("/invitation")
+	public String getInvitation(HttpSession session, Model model) {
+		
+		InvitationGenerator ig = InvitationGenerator.getInvitationGeneratorfromSession(session);
+		Invitation inv = ig.generateInvitation();
+		inviteRepo.save(inv);
+		model.addAttribute("link", inv.getPath());
+		
+		return "user/invitation";
 	}
 	
 	@GetMapping("/preview")
