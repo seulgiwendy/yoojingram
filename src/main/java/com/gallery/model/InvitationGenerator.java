@@ -10,6 +10,7 @@ import com.gallery.domain.Admin;
 import com.gallery.domain.Category;
 import com.gallery.domain.Invitation;
 import com.gallery.repositories.InvitationRepository;
+import com.gallery.utils.SessionInfoUtils;
 import com.gallery.utils.StringUtils;
 
 import static com.gallery.utils.StringUtils.*;
@@ -20,13 +21,11 @@ public class InvitationGenerator {
 	
 	Admin admin;
 	String path;
-	List<Category> categories;
 	
 	
 	private InvitationGenerator(HttpSession session) {
-		Admin loggedInUser= (Admin)session.getAttribute("admin");
+		Admin loggedInUser= (Admin)session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
 		this.admin = loggedInUser;
-		this.categories = loggedInUser.getCategories();
 		
 	}
 	
@@ -36,7 +35,7 @@ public class InvitationGenerator {
 	
 	public Invitation generateInvitation() {
 		this.path = StringUtils.randomString(INVITATION_PERMALINK_LENGTH);
-		return new Invitation(this.path, this.categories, this.admin);
+		return new Invitation(this.path, this.admin);
 	}
 
 }

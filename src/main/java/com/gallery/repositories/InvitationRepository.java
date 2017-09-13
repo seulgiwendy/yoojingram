@@ -8,4 +8,5 @@ import com.gallery.domain.Invitation;
 public interface InvitationRepository extends CrudRepository<Invitation, Long>{
 	
 	public Invitation findByAdmin(Admin admin);
+	public Invitation findByPath(String path);
 }

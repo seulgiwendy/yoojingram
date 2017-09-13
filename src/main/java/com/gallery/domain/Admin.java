@@ -18,10 +18,26 @@ public class Admin {
 	
 	private String name;
 	private String password;
+	private String nickname;
 	
 	@OneToMany(mappedBy = "admin")
 	@OrderBy("time asc")
 	private List<Category> categories;
+	
+	@Deprecated
+	public Admin() {
+		
+	}
+	
+	private Admin(String id, String password, String nickname) {
+		this.name = id;
+		this.password = password;
+		this.nickname = nickname;
+	}
+	
+	public static Admin createAdmin(String id, String password, String nickname) {
+		return new Admin(id, password, nickname);
+	}
 
 	public String getName() {
 		return name;
@@ -45,6 +61,14 @@ public class Admin {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	

@@ -2,13 +2,22 @@ package com.gallery.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Invitation {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
 	private String path;
 
@@ -16,18 +25,16 @@ public class Invitation {
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_invitation_to_admin"))
 	private Admin admin;
 	
-	@JsonIgnore
-	private List<Category>categories;
 	
 	@Deprecated
 	public Invitation() {
 		
 	}
 	
-	public Invitation(String path, List<Category>categories, Admin admin) {
+	public Invitation(String path, Admin admin) {
 		this.path = path;
 		this.admin = admin;
-		this.categories = categories;
+		
 	}
 
 	public String getPath() {

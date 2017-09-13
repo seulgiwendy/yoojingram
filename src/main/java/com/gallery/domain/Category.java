@@ -36,6 +36,10 @@ public class Category {
 	public List<Photo> getPhotos() {
 		return this.photos;
 	}
+	
+	public long getId() {
+		return this.id;
+	}
 
 	public String getCategory() {
 		return category;
@@ -80,5 +84,7 @@ public class Category {
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
 	}
+
+
 
 }

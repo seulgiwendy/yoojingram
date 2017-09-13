@@ -18,7 +18,7 @@ public class StringUtilsTest {
 
 	@Test
 	public void test() {
-		String randomString = randomString(TEST_STRING_LENGTH, rnd);
+		String randomString = randomString(TEST_STRING_LENGTH);
 		System.out.println(randomString);
 		assertEquals(TEST_STRING_LENGTH, randomString.length());
 	}
