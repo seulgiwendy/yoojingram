@@ -8,5 +8,6 @@ import com.gallery.domain.Category;
 public interface CategoryRepository extends CrudRepository<Category, Long>{
 	
 	Category findByAdmin(Admin admin);
+	Category findByCategory(String category);
 
 }

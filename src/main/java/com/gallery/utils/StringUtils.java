@@ -19,7 +19,9 @@ public class StringUtils {
 	}
 
 	public static String getExtensionFromMultipart(MultipartFile upload) {
-		return (upload.getOriginalFilename().split("."))[1];
+		System.out.println(upload.getOriginalFilename());
+		System.out.print(upload.getName());
+		return (upload.getOriginalFilename().split("\\."))[1];
 
 	}
 

@@ -25,7 +25,7 @@ public class ImageUploader {
 	private final String DASH = "-";
 	private final String PERIOD = ".";
 
-	AmazonS3 s3client = AmazonS3ClientBuilder.defaultClient();
+	AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
 
 	private String extension;
 	private String contentType;
@@ -75,10 +75,10 @@ public class ImageUploader {
 		meta.setContentType(contentType);
 	}
 
-	private boolean isNonExistingBucket() {
+	private boolean isNonExistingBucket(String bucketname) {
 		List<Bucket> bucketlist = s3client.listBuckets();
 		for (Bucket b : bucketlist) {
-			if (b.getName().equals(this.admin.getName())) {
+			if (b.getName().equals(bucketname)) {
 				return false;
 			}
 		}
@@ -94,7 +94,7 @@ public class ImageUploader {
 		String bucketname = BUCKET_PREFIX + DASH + this.admin.getName();
 		this.uploadedFileName = generateFileName();
 
-		if (isNonExistingBucket()) {
+		if (isNonExistingBucket(bucketname)) {
 			s3client.createBucket(generateBucketCreateRequest(bucketname));
 		}
 		return new PutObjectRequest(bucketname, uploadedFileName, fileInputStream, meta);
@@ -106,6 +106,7 @@ public class ImageUploader {
 			InputStream stream = new ByteArrayInputStream(imgbytes);
 			generateMetadata(imgbytes.length);
 			s3client.putObject(generatePutRequest(stream));
+			System.out.println(uploadedFileName);
 			return true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

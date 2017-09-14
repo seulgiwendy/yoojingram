@@ -23,6 +23,18 @@ public class Photo {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_to_category"))
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_to_admin"))
+	private Admin admin;
+	
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+	
+	public Admin getAdmin() {
+		return this.admin;
+	}
 
 	public long getId() {
 		return id;

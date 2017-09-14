@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gallery.domain.Admin;
+import com.gallery.domain.Category;
 import com.gallery.domain.Photo;
 import com.gallery.domain.PhotoFailMessage;
 import com.gallery.domain.PhotoSuccessMessage;
@@ -41,6 +42,7 @@ public class ApiController {
 	@PostMapping("/api/upload")
 	public PhotoUploadMessage uploadPhoto(@RequestParam MultipartFile upload, String title, String description, String category, HttpSession session) throws IOException {
 		Admin loggedInAdmin = (Admin)session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
+		Category categories = categoryRepo.findByCategory(category);
 		String extension = StringUtils.getExtensionFromMultipart(upload);
 		String contentType = upload.getContentType();
 		ImageUploader iu = ImageUploader.getUploaderInstance(loggedInAdmin, extension, contentType);
@@ -48,6 +50,7 @@ public class ApiController {
 		
 		if (photoUpload) {
 			Photo photoInfoOnDB = new Photo();
+			photoInfoOnDB.setCategory(categories);
 			photoInfoOnDB.setDate(DateUtils.getDaysTimeStamp());
 			photoInfoOnDB.setPath(iu.getUploadedFileName());
 			photoInfoOnDB.setDescription(description);
