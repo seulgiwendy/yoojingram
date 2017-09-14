@@ -48,6 +48,10 @@ public class ImageUploader {
 	public static ImageUploader getUploaderInstance(Admin admin, String extension, String contentType) {
 		return new ImageUploader(admin, extension, contentType);
 	}
+	
+	public String getUploadedFileName() {
+		return this.uploadedFileName;
+	}
 
 	private String generateBucketName() {
 		StringBuilder sb = new StringBuilder();
