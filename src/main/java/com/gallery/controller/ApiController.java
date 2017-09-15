@@ -6,13 +6,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gallery.domain.Admin;
 import com.gallery.domain.Category;
+import com.gallery.domain.CategoryInfoChecker;
+import com.gallery.domain.DuplicatedInfoChecker;
 import com.gallery.domain.Photo;
 import com.gallery.domain.PhotoFailMessage;
 import com.gallery.domain.PhotoSuccessMessage;
@@ -63,6 +67,27 @@ public class ApiController {
 		pum = new PhotoFailMessage("", photoUpload);
 		pum.setHtmlForm();
 		return pum;
+	}
+	
+	@PostMapping("/api/join/checkid")
+	public DuplicatedInfoChecker checkUniqueId(@RequestBody String id) {
+		if (adminRepo.findByName(id) != null) {
+			return new DuplicatedInfoChecker(id, false);
+		}
+		return new DuplicatedInfoChecker(id, true);
+	}
+	
+	@PostMapping("/api/categories/check")
+	public DuplicatedInfoChecker checkUniqueCategory(@RequestBody String category) {
+		if (categoryRepo.findByCategory(category) != null) {
+			return new DuplicatedInfoChecker(category, false);
+		}
+		return new DuplicatedInfoChecker(category, true);
+	}
+	
+	@PostMapping("/api/categories/delete/{id}")
+	public DuplicatedInfoChecker deleteRequestedCategory(@PathVariable long id, HttpSession session) {
+		
 	}
 
 }
