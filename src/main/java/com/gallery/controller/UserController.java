@@ -45,7 +45,7 @@ public class UserController {
 		if (loginUser != null) {
 			session.setAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD, loginUser);
 			model.addAttribute("username", loginUser.getName());
-			return "user/adminpage";
+			return "user/admin";
 
 		}
 

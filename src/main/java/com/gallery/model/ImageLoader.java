@@ -30,6 +30,10 @@ public class ImageLoader {
 		return new ImageLoader(admin.getName(), photo.getPath());
 
 	}
+	
+	public static ImageLoader getInstanceByPhoto(Photo photo) {
+		return new ImageLoader(photo.getAdmin().getName(), photo.getPath());
+	}
 
 	private GetObjectRequest getS3Request() {
 		bucketname.append(BUCKET_PREFIX);

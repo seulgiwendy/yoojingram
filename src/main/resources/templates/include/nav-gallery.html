@@ -1,0 +1,21 @@
+ <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>마이갤러리</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>{{category.admin.name}}의 갤러리</p>
+            <li>
+                <a href="#">{{category.category}}</a></li>
+
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+        {{^loginuser}}
+            <li><a href="/user/login" class="download">로그인</a></li>
+		{{/loginuser}}
+		{{#loginuser}}
+			<li><a href="/user/logout" class="download">로그아웃</a></li>
+			{{loginuser}}
+        </ul>
+    </nav>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+{{> include/header}}
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {{> include/nav-admin}}
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+
+                    </button>
+                </div>
+
+
+            </div>
+        </nav>
+
+
+
+        <div class="container" id="main">
+            <div class="panel panel-default" id="panel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3 class="text-center">관리자 페이지에 오신 것을 환영합니다.</h3>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {{loginuser.name}}님, 환영합니다.
+                            </div>
+                        </div>
+                        <div class="btn-group-vertical center-block" role="group" aria-label="...">
+                            <a href="/user/generateinvite"> <button type="button"  class="btn btn-default" id="buttons"> <span class="glyphicon glyphicon-link"></span> 방문자 초대 링크 만들기</button></a>
+                            <br><br>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#glyphicon glyphicon-align-left').html("<span>사이드바 펼치기</span>")
+                $('#sidebar').toggleClass('active');
+
+
+            });
+        });
+    </script>
+</body>
+</html>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,11 +21,13 @@ import com.gallery.domain.Category;
 import com.gallery.domain.CategoryInfoChecker;
 import com.gallery.domain.DuplicatedInfoChecker;
 import com.gallery.domain.InvalidSessionChecker;
+import com.gallery.domain.Invitation;
 import com.gallery.domain.Photo;
 import com.gallery.domain.PhotoFailMessage;
 import com.gallery.domain.PhotoSuccessMessage;
 import com.gallery.domain.PhotoUploadMessage;
 import com.gallery.model.ImageUploader;
+import com.gallery.model.InvitationGenerator;
 import com.gallery.model.PhotoDeleteRequestHandler;
 import com.gallery.repositories.AdminRepository;
 import com.gallery.repositories.CategoryRepository;
@@ -89,7 +92,7 @@ public class ApiController {
 		return new DuplicatedInfoChecker(category, true);
 	}
 	
-	@PostMapping("/api/categories/delete/{id}")
+	@GetMapping("/api/categories/delete/{id}")
 	public DuplicatedInfoChecker deleteRequestedCategory(@PathVariable long id, HttpSession session) {
 		Category targetCategory = categoryRepo.findOne(id);
 		Admin loginAdmin = (Admin)session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
@@ -108,6 +111,15 @@ public class ApiController {
 		
 		return new DuplicatedInfoChecker(loginAdmin.getName(), false);
 		
+	}
+	
+	@GetMapping("/api/invitation")
+	public Invitation generateInvitation(HttpSession session) {
+		if(session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD) == null) {
+			return null;
+		}
+		InvitationGenerator ig = InvitationGenerator.getInvitationGeneratorfromSession(session);
+		return ig.generateInvitation();
 	}
 
 }
