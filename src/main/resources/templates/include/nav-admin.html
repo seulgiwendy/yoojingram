@@ -1,6 +1,6 @@
 <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>나지주그램</h3>
+            <h3>마이갤러리</h3>
         </div>
 
         <ul class="list-unstyled components">
@@ -33,10 +33,10 @@
         <ul class="list-unstyled CTAs">
         	{{#loginuser}}
             <li><a href="/users/logout" class="download">로그아웃</a></li>
+            <li><a href="/invitation/preview" class="article">방문자 모드 미리보기</a></li>
             {{/loginuser}}
             {{^loginuser}}
             <li><a href="/users/login" class="download">로그인</a></li>
             {{/loginuser}}
-            <li><a href="/invitation/preview" class="article">방문자 모드 미리보기</a></li>
         </ul>
     </nav>

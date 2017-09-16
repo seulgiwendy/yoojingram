@@ -40,6 +40,10 @@ public class Category {
 	public long getId() {
 		return this.id;
 	}
+	
+	public int getCount() {
+		return this.photos.size();
+	}
 
 	public String getCategory() {
 		return category;

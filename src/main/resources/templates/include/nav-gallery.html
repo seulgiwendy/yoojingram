@@ -6,7 +6,11 @@
         <ul class="list-unstyled components">
             <p>{{category.admin.name}}의 갤러리</p>
             <li>
-                <a href="#">{{category.category}}</a></li>
+            {{#invitation}}
+            		{{#invitation.admin.categories}}
+                <a href="#">{{category}}</a></li>
+                {{/invitation.admin.categories}}
+             {{/invitation}}
 
         </ul>
 

@@ -59,21 +59,6 @@
 
 
 
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap Js CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#glyphicon glyphicon-align-left').html("<span>사이드바 펼치기</span>")
-                $('#sidebar').toggleClass('active');
-
-
-            });
-        });
-    </script>
+    {{> include/footer}}
 </body>
 </html>
