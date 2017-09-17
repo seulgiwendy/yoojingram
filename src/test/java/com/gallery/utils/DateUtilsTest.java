@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class DateUtilsTest {
 	
-	private static final String CURRENT_DAY = "2017-09-10";
+	private static final String CURRENT_DAY = "2017-09-17";
 	
 	Date d;
 	
