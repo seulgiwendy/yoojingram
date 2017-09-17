@@ -4,7 +4,7 @@
 function checkCategoryDuplicated(){
 
     var input = $('#category').val();
-    var url = 'http://localhost:8080/api/categories/check';
+    var url = '/api/categories/check';
 
     if (input.length < 1){
         $('#category-warning').hide();
