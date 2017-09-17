@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+{{> include/header}}
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {{> include/nav-admin}}
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+
+                    </button>
+                </div>
+
+
+            </div>
+        </nav>
+
+
+
+        <div class="container" id="main">
+            <div class="panel panel-default" id="panel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h3 class="text-center">회원 가입.</h3>
+                                <br>
+                                <form action = "/user/join" method="post">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">ID</span>
+                                    <input type="text" class="form-control" placeholder="User ID" id="id" name ="id" aria-describedby="basic-addon1" oninput="checkId()" required>
+
+                                </div>
+                                    <br>
+                                    <div class="alert alert-warning" id="id-warning" style="display: none"><span class="glyphicon glyphicon-exclamation-sign"></span> 앗! 아이디가 중복됩니다.</div>
+                                    <div class="alert alert-warning" id="id-short-warning" style="display: none"><span class="glyphicon glyphicon-exclamation-sign"></span> 앗! 아이디가 너무 짧습니다. <br> 아이디는 5글자 이상이어야 합니다</div>
+                                    <br>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon2">Password</span>
+                                    <input type="password" class="form-control" id="pwd" name="password" placeholder="비번" aria-describedby="basic-addon2" oninput="checkPwd()" required>
+
+                                </div>
+                                <br>
+                                <br>
+                                <div class="input-group">
+                                		<span class="input-group-addon" id="basic-addon3">별명</span>
+                                		<input type="text" class="form-control" id="nickname" name="nickname" placeholder="김별명" aria-describedby="basic-addon3" required>
+                                
+                                </div>
+                                    <br>
+                                    <div class="alert alert-warning" id="pwd-warning" style="display: none"><span class="glyphicon glyphicon-exclamation-sign"></span> 앗! 비번이 넘나 짧습니다. <br> 비번은 6글자 이상이어야 됩니다. <br>그래도 특수문자 넣으란 얘기는 안 할게!</div>
+                                    <br>
+                                    <br>
+
+                                    <button type="submit" class="btn btn-success" id="join-submit" disabled>가입하기</button>
+                                    <button type="reset" class="btn btn-danger">다시 작성하기</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{{> include/footer}}
+</body>
+</html>

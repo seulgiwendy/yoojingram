@@ -26,8 +26,26 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/user/logout")
+	public String getLogout(HttpSession session) {
+		session.removeAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
+		return "redirect:/user/admin";
+	}
+	
+	@GetMapping("/user/admin")
+	public String getAdminPage() {
+		return "user/admin";
+	}
+	
+	@GetMapping("/user/join")
+	public String getJoinForm() {
+		return "user/join";
+	}
+	
 	@PostMapping("/user/join")
 	public String join(String id, String password, String nickname) {
+		
+		System.out.println(id + " " + password + " " + nickname);
 		
 		if (id == null || password == null || nickname == null) {
 			return "user/joinfail";
@@ -45,7 +63,7 @@ public class UserController {
 		if (loginUser != null) {
 			session.setAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD, loginUser);
 			model.addAttribute("username", loginUser.getName());
-			return "user/admin";
+			return "redirect:/user/admin";
 
 		}
 

@@ -28,7 +28,7 @@ $(document).ready(function (e) {
         $('#loading').show();
 
         $.ajax({
-            url: "upload-image.php",
+            url: "/api/upload",
             type: "POST",
             data: new FormData(this),
             contentType: false,
@@ -36,8 +36,9 @@ $(document).ready(function (e) {
             processData: false,
             success: function(data)
             {
+            		console.log(data);
                 $('#loading').hide();
-                $('#message').html(data);
+                $('#message').html(data.html);
             }
         });
 

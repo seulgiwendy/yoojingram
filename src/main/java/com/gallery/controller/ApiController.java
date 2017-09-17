@@ -61,10 +61,12 @@ public class ApiController {
 		
 		if (photoUpload) {
 			Photo photoInfoOnDB = new Photo();
+			photoInfoOnDB.setAdmin(loggedInAdmin);
 			photoInfoOnDB.setCategory(categories);
 			photoInfoOnDB.setDate(DateUtils.getDaysTimeStamp());
 			photoInfoOnDB.setPath(iu.getUploadedFileName());
 			photoInfoOnDB.setDescription(description);
+			photoInfoOnDB.setTitle(title);
 			
 			photoRepo.save(photoInfoOnDB);
 			pum = new PhotoSuccessMessage(photoInfoOnDB.getPath(), photoUpload);
@@ -86,10 +88,12 @@ public class ApiController {
 	
 	@PostMapping("/api/categories/check")
 	public DuplicatedInfoChecker checkUniqueCategory(@RequestBody String category) {
-		if (categoryRepo.findByCategory(category) != null) {
-			return new DuplicatedInfoChecker(category, false);
+		String query = category.replaceAll("=", "");
+		
+		if (categoryRepo.findByCategory(query) != null) {
+			return new DuplicatedInfoChecker(query, false);
 		}
-		return new DuplicatedInfoChecker(category, true);
+		return new DuplicatedInfoChecker(query, true);
 	}
 	
 	@GetMapping("/api/categories/delete/{id}")

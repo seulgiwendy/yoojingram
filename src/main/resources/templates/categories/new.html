@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+{{> include/header}}
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {{> include/nav-admin}}
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+
+                    </button>
+                </div>
+
+
+            </div>
+        </nav>
+
+
+
+        <div class="container" id="main">
+            <div class="panel panel-default" id="panel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h3 class="text-center">카테고리 생성</h3>
+                                <br>
+                                <form action="/categories/new" method="post">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">Category</span>
+                                        <input type="text" class="form-control" placeholder="카테고리 이름" id="category" name="category" aria-describedby="basic-addon1" oninput="checkCategoryDuplicated()" required>
+
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                    	<span class="input-group-addon" id="basic-addon2">설명</span>
+                                    	<input type="text" class="form-control" placeholder="카테고리 설명" id="description" name="description" aria-describedby="basic-addon2" required>
+                                    
+                                    </div> 
+                                   
+                                    <br>
+                                    <div class="alert alert-warning" id="category-warning" style="display: none"><span class="glyphicon glyphicon-exclamation-sign"></span> 앗! 카테고리 이름이 중복됩니다.</div>
+                                    <br>
+                                    <br>
+                                    <button type="submit" class="btn btn-success" id="join-submit" disabled>생성</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{{> include/footer}}
+</body>
+</html>

@@ -5,10 +5,10 @@
 
         <ul class="list-unstyled components">
             <p>{{category.admin.name}}의 갤러리</p>
-            <li>
             {{#invitation}}
             		{{#invitation.admin.categories}}
-                <a href="#">{{category}}</a></li>
+            <li>
+                <a href="/categories/{{id}}">{{category}}</a></li>
                 {{/invitation.admin.categories}}
              {{/invitation}}
 
@@ -20,6 +20,6 @@
 		{{/loginuser}}
 		{{#loginuser}}
 			<li><a href="/user/logout" class="download">로그아웃</a></li>
-			{{loginuser}}
+			{{/loginuser}}
         </ul>
-    </nav>
+    </nav> 

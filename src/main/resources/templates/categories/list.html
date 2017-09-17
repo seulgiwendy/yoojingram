@@ -45,16 +45,17 @@
                                     <th>삭제할까요?</th>
                                 </tr>
                                 </thead>
+                                		{{#categories}}
                                 <tbody>
                                 <tr>
-                                		{{#categories}}
                                     <th scope="row">{{@index}}</th>
-                                    <td><a href="#"> {{categories.category}} </a></td>
-                                    <td>N/A</td>
-                                    <td>{{categories.count}}</td>
+                                    <td><a href="#"> {{category}} </a></td>
+                                    <td>{{date}}</td>
+                                    <td>{{count}}</td>
                                     <td><a href="#"> <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> 삭제하기 </button> </a></td>
                                 </tr>
                                 </tbody>
+                                    {{/categories}}
 
                             </table>
 

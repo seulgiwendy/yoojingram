@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.input-group{
+    max-width: 500px;
+    margin: auto;
+}
+
+.alert{
+    max-width: 500px;
+    margin: auto;
+}

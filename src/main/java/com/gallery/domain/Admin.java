@@ -3,6 +3,7 @@ package com.gallery.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Admin {
 	private String nickname;
 	
 	@OneToMany(mappedBy = "admin")
-	@OrderBy("time asc")
+	
 	private List<Category> categories;
 	
 	@Deprecated
@@ -37,6 +38,10 @@ public class Admin {
 	
 	public static Admin createAdmin(String id, String password, String nickname) {
 		return new Admin(id, password, nickname);
+	}
+	
+	public long getId() {
+		return this.id;
 	}
 
 	public String getName() {
@@ -69,6 +74,28 @@ public class Admin {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Admin other = (Admin) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 	
 	

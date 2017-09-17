@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+{{> include/header}}
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {{> include/nav-admin}}
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+
+                    </button>
+                </div>
+
+
+            </div>
+        </nav>
+
+
+
+        <div class="container" id="main">
+
+                   <div class="jumbotron">
+                       <h1 class="display-3">안녕하세요.</h1>
+                       <p class="lead">마이갤러리에 오신 것을 환영합니다.</p>
+                       <p>사진을 올리고, 내가 원하는 사람들과 공유할 수 있는 서비스입니다.</p>
+                       <a class="btn btn-primary btn-lg" href="/user/login" role="button"><span class="glyphicon glyphicon-user"></span> 로그인 </a>
+                       <a class="btn btn-primary btn-lg" href="/user/join" role="button"><span class="glyphicon glyphicon-pencil"></span> 회원가입 </a>
+
+
+                </div>
+            </div>
+
+</div>
+
+{{> include/footer}}
+</body>
+</html>

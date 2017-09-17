@@ -4,11 +4,11 @@
         </div>
 
         <ul class="list-unstyled components">
-            <p>관리자 모드</p>
+            <p>관리자 모드 - {{loginuser.name}}</p>
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-picture"></span> 사진 관리</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="#">사진 올리기</a></li>
+                    <li><a href="/photo/upload">사진 올리기</a></li>
                     <li><a href="#">내 사진 관리하기</a></li>
 
                 </ul>
@@ -16,8 +16,8 @@
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span> 카테고리 관리</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">카테고리 만들기</a></li>
-                    <li><a href="#">카테고리 목록 보기</a></li>
+                    <li><a href="/categories/new">카테고리 만들기</a></li>
+                    <li><a href="/categories/list">카테고리 목록 보기</a></li>
 
                 </ul>
                 <a href="#">About</a>
@@ -32,11 +32,11 @@
 
         <ul class="list-unstyled CTAs">
         	{{#loginuser}}
-            <li><a href="/users/logout" class="download">로그아웃</a></li>
+            <li><a href="/user/logout" class="download">로그아웃</a></li>
             <li><a href="/invitation/preview" class="article">방문자 모드 미리보기</a></li>
             {{/loginuser}}
             {{^loginuser}}
-            <li><a href="/users/login" class="download">로그인</a></li>
+            <li><a href="/user/login" class="download">로그인</a></li>
             {{/loginuser}}
         </ul>
     </nav>

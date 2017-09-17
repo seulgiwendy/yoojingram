@@ -5,7 +5,7 @@
 
 var idCheck = true;
 var pwdCheck = false;
-var url = "http://localhost:8080/api/join/checkid";
+var url = "/api/join/checkid";
 
 function setJoinButtonActive() {
 	if (idCheck && pwdCheck == true) {

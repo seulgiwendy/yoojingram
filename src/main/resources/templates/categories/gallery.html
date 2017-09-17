@@ -33,12 +33,12 @@
 
         <div class="tz-gallery">
 
-				{{#category.photos}}
             <div class="row">
+				{{#category.photos}}
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <a class="lightbox" href="/photo/{{id}}">
-                            <img src="/photo/{{id}}" alt="{{@index}}">
+                        <a class="lightbox" href="http://localhost:8080/photo/{{id}}">
+                            <img src="http://localhost:8080/photo/{{id}}" alt="{{@index}}">
                         </a>
                         <div class="caption">
                             <h3>{{title}}</h3>
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 				{{/category.photos}}
+            </div>
         </div>
     </div>
     <script>
