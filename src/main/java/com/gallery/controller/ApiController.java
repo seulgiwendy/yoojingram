@@ -31,6 +31,7 @@ import com.gallery.model.InvitationGenerator;
 import com.gallery.model.PhotoDeleteRequestHandler;
 import com.gallery.repositories.AdminRepository;
 import com.gallery.repositories.CategoryRepository;
+import com.gallery.repositories.InvitationRepository;
 import com.gallery.repositories.PhotoRepository;
 import com.gallery.utils.DateUtils;
 import com.gallery.utils.SessionInfoUtils;
@@ -49,6 +50,9 @@ public class ApiController {
 	
 	@Autowired
 	AdminRepository adminRepo;
+	
+	@Autowired
+	InvitationRepository inviteRepo;
 
 	@PostMapping("/api/upload")
 	public PhotoUploadMessage uploadPhoto(@RequestParam MultipartFile upload, String title, String description, String category, HttpSession session) throws IOException {
@@ -80,10 +84,11 @@ public class ApiController {
 	
 	@PostMapping("/api/join/checkid")
 	public DuplicatedInfoChecker checkUniqueId(@RequestBody String id) {
-		if (adminRepo.findByName(id) != null) {
-			return new DuplicatedInfoChecker(id, false);
+		String query = id.replaceAll("=", "");
+		if (adminRepo.findByName(query) != null) {
+			return new DuplicatedInfoChecker(query, false);
 		}
-		return new DuplicatedInfoChecker(id, true);
+		return new DuplicatedInfoChecker(query, true);
 	}
 	
 	@PostMapping("/api/categories/check")
@@ -123,7 +128,13 @@ public class ApiController {
 			return null;
 		}
 		InvitationGenerator ig = InvitationGenerator.getInvitationGeneratorfromSession(session);
-		return ig.generateInvitation();
+		return inviteRepo.save(ig.generateInvitation());
+	}
+	
+	@PostMapping("/api/message/checkuser")
+	public List<Admin> checkAdminId(@RequestBody String id) {
+		String query = id.replaceAll("=", "");
+		return adminRepo.findByNameContaining(query);
 	}
 
 }

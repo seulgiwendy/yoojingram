@@ -29,7 +29,7 @@ public class UserController {
 	@GetMapping("/user/logout")
 	public String getLogout(HttpSession session) {
 		session.removeAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
-		return "redirect:/user/admin";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/user/admin")

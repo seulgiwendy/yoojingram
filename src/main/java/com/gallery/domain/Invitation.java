@@ -24,6 +24,7 @@ public class Invitation {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_invitation_to_admin"))
+	@JsonIgnore
 	private Admin admin;
 	
 	

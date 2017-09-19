@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.servlet.http.HttpSession;
+
+import com.gallery.controller.LandingPageController;
 
 @Entity
 public class Photo {
@@ -23,15 +26,15 @@ public class Photo {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_to_category"))
 	private Category category;
-	
+
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_to_admin"))
 	private Admin admin;
-	
+
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	
+
 	public Admin getAdmin() {
 		return this.admin;
 	}
@@ -90,6 +93,16 @@ public class Photo {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public boolean isAccessiblePhoto(HttpSession session) {
+		Invitation sessionedInvitation = (Invitation) session
+				.getAttribute(LandingPageController.SESSIONED_INVITATION_KEYWORD);
+
+		if (sessionedInvitation == null) {
+			return false;
+		}
+		return sessionedInvitation.getAdmin().equals(this.admin);
 	}
 
 }

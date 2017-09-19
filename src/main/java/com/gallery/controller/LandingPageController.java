@@ -13,6 +13,7 @@ import com.gallery.domain.Admin;
 import com.gallery.domain.Category;
 import com.gallery.domain.Invitation;
 import com.gallery.model.InvitationGenerator;
+import com.gallery.repositories.AdminRepository;
 import com.gallery.repositories.InvitationRepository;
 import com.gallery.utils.SessionInfoUtils;
 
@@ -24,16 +25,20 @@ public class LandingPageController {
 
 	@Autowired
 	InvitationRepository inviteRepo;
+	
+	@Autowired
+	AdminRepository adminRepo;
 
 	@GetMapping("/invitation/{permalink}")
 	public String getLandingPage(@PathVariable String permalink, HttpSession session) {
 
 		if (permalink.equals("preview") && session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD) != null) {
 			Admin admin = (Admin) session.getAttribute(SessionInfoUtils.SESSIONED_LOGIN_KEYWORD);
+			Admin newAdminInfo = adminRepo.findByName(admin.getName());
 			Invitation temporaryInvitation = new Invitation();
-			temporaryInvitation.setAdmin(admin);
+			temporaryInvitation.setAdmin(newAdminInfo);
 			session.setAttribute(SESSIONED_INVITATION_KEYWORD, temporaryInvitation);
-			return "redirect:/categories/" + admin.getCategories().get(0).getId();
+			return "redirect:/categories/" + newAdminInfo.getCategories().get(0).getId();
 
 		}
 

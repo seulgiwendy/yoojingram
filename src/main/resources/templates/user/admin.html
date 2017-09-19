@@ -38,11 +38,21 @@
                                 {{loginuser.name}}님, 환영합니다.
                             </div>
                         </div>
-                        <div class="btn-group-vertical center-block" role="group" aria-label="...">
-                            <a href="/user/generateinvite"> <button type="button"  class="btn btn-default" id="buttons"> <span class="glyphicon glyphicon-link"></span> 방문자 초대 링크 만들기</button></a>
+                          <div class="btn-group-vertical center-block" role="group" aria-label="...">
+                            <a> <button type="button"  class="btn btn-default" id="buttons" onclick="getInvitation()"> <span class="glyphicon glyphicon-link"></span> 방문자 초대 링크 만들기</button></a>
                             <br><br>
 
                         </div>
+
+                        <div class="panel panel-default" >
+                            <div class="panel-body text-center" id="invite-panel" style="display: none;">
+                                초대링크가 생성되었다능.
+                                <br>
+                                <h3 id="generated_uri"></h3>
+                                <br>
+                                <a class="btn btn-block btn-social btn-kakao" id="sharebutton"><span class="glyphicon glyphicon-send"></span>카카오톡으로 공유하기 </a>
+
+                            </div>
 
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 package com.gallery.model;
 
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
@@ -25,7 +26,8 @@ public class ImageUploader {
 	private final String DASH = "-";
 	private final String PERIOD = ".";
 
-	AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+	AmazonS3 s3client = new AmazonS3Client(InstanceProfileCredentialsProvider.getInstance());
+
 
 	private String extension;
 	private String contentType;
